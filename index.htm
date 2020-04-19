@@ -139,7 +139,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     }).addTo(map);
 	
    var layer_casi = L.choropleth(geojson, {
-        valueProperty: 'Totale casi',
+        valueProperty: 'casi',
         scale: ['blue','white','red'], // chroma.js scale - include as many as you like
 	steps: 8, // number of breaks or steps in range
 	mode: 'q', // q for quantile, e for equidistant, k for k-means
@@ -149,7 +149,15 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             fillOpacity: 0.6
         },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup('Totale casi:' + feature.properties.casi + '<br>');
+      layer.bindPopup(
+	  '<strong>Provincia<strong>: '  + feature.properties.prov_name+ '<br>'+
+          '<strong>Regionestrong>: '     + feature.properties.reg_name+ '<br> +
+          '<strong>Popolazione<strong>: ' +  feature.properties.reg_name+ '<br> +
+          '<strong>Totale casi<strong>: ' + feature.properties.casi + '<br>' +
+          '<strong>Nuovi casi<strong>: ' + feature.properties.nuovi_casi  '<br>' +
+          '<strong>Incidenza su popolazione % <strong>: '+ feature.properties.Cov19_Inc +'<br>' +
+          '<strong>Tasso nuovi casi giornaliero <strong>: '+ feature.properties.Delta_day 
+           );
     }
     }).addTo(map);
 	
