@@ -158,7 +158,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
 	      "OpenTopoMap": OpenTopoMap,
               "EsriWorld": Esri_WorldImagery,
-               [legend_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
+               [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
 
               };
 
