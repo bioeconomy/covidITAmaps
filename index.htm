@@ -113,16 +113,7 @@ function legend_for_choropleth_layer(layer, name, units, id) {
     return HTML;
 };
 
-function visualise_data(feature, layer) {
-      layer.bindPopup(
-	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
-          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
-          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
-          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
-          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
-          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    };
+
 
 var map= L.map('map', {
 		center: [41.7, 11.3],
@@ -142,7 +133,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature:visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);
 	
    var layer_casi = L.choropleth(geojson, {
@@ -155,7 +155,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature: visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);
 	
     var nuovi_casi = L.choropleth(geojson, {
@@ -168,7 +177,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature: visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);	
 
   var layer_nuovi_casi = L.choropleth(geojson, {
@@ -181,7 +199,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature: visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);	
 
  var layer_incidenza = L.choropleth(geojson, {
@@ -194,7 +221,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature: visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);	
 	
 
@@ -208,7 +244,16 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             weight: 2,
             fillOpacity: 0.6
         },
-    onEachFeature: visualise_data(feature, layer)
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup(
+	  '<strong>Provincia<strong> : '  + feature.properties.prov_name + '<br>' +
+          '<strong>Regione<strong> : '    + feature.properties.reg_name  +  '<br>' +
+          '<strong>Popolazione<strong> : ' +  feature.properties.Popolazione + '<br>' +
+          '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
+          '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
+          '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
+    };
     }).addTo(map);	
 	
 	
