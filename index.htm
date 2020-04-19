@@ -350,7 +350,7 @@ var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
 	      [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno % casi', '', 'legend_delta_day')]: layer_delta_day
               };
 
-var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
+var layersControl = L.control.layers({}, layers,{ collapsed: true }).addTo(map);
 	
 });
 
