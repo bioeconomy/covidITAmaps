@@ -158,7 +158,110 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     onEachFeature: visualise_data(feature, layer)
     }).addTo(map);
 	
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+    var nuovi_casi = L.choropleth(geojson, {
+        valueProperty: 'nuovi_casi',
+        scale: ['blue','white','red'], // chroma.js scale - include as many as you like
+	steps: 8, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
+        },
+    onEachFeature: visualise_data(feature, layer)
+    }).addTo(map);	
+
+  var layer_nuovi_casi = L.choropleth(geojson, {
+        valueProperty: 'nuovi_casi',
+        scale: ['blue','white','red'], // chroma.js scale - include as many as you like
+	steps: 8, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
+        },
+    onEachFeature: visualise_data(feature, layer)
+    }).addTo(map);	
+
+ var layer_incidenza = L.choropleth(geojson, {
+        valueProperty: 'Cov19_Inc',
+        scale: ['white','red'], // chroma.js scale - include as many as you like
+	steps: 8, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
+        },
+    onEachFeature: visualise_data(feature, layer)
+    }).addTo(map);	
+	
+
+ var layer_delta_day = L.choropleth(geojson, {
+        valueProperty: 'Delta_day',
+        scale: ['white','red'], // chroma.js scale - include as many as you like
+	steps: 8, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
+        },
+    onEachFeature: visualise_data(feature, layer)
+    }).addTo(map);	
+	
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+  layer_nuovi_casi.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_nuovi_casi').show();
+        });
+    });
+
+   layer_nuovi_casi.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_nuovi_casi').hide();
+        });
+    });	
+	
+  layer_incidenza.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_incidenza').show();
+        });
+    });
+
+   layer_incidenza.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_incidenza').hide();
+        });
+    });
+	
+  layer_delta_day.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_delta_day').show();
+        });
+    });
+
+    layer_delta_day.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_delta_day').hide();
+        });
+    });
+	
     layer_popolazione.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -183,7 +286,6 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 	    $('#legend_pop').hide();	
         });
     });
-
     layer_casi.on('remove', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -194,9 +296,12 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
-              "EsriWorld": Esri_WorldImagery,
+              "Satellite EsriWorld": Esri_WorldImagery,
               [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
-              [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi
+              [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
+	      [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
+	      [legend_for_choropleth_layer(layer_incidenza, 'Incidenza % pop', '', 'legend_casi')]: layer_incidenza,
+	      [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno % casi', '', 'legend_delta_day')]: layer_delta_day
               };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
