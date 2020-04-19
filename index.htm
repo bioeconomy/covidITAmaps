@@ -137,7 +137,23 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
       layer.bindPopup('Abitanti:' + feature.properties.Popolazione + '<br>');
     }
     }).addTo(map);
-
+	
+   var layer_casi = L.choropleth(geojson, {
+        valueProperty: 'Totale casi',
+        scale: ['blue','white','red'], // chroma.js scale - include as many as you like
+	steps: 8, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
+        },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup('Totale casi:' + feature.properties.casi + '<br>');
+    }
+    }).addTo(map);
+	
+	
     layer_popolazione.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -154,11 +170,26 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         });
     });
 
-  
-var layers = {"OpenStreetMap": OpenStreetMap_Mapnik
-              "EsriWorld": Esri_WorldImagery,
-              [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
+  layer_popolazione.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_casi').show();
+        });
+    });
 
+    layer_popolazione.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_casi').hide();
+        });
+    });
+
+var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
+              "EsriWorld": Esri_WorldImagery,
+              [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
+              [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi
               };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
