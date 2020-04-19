@@ -142,7 +142,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-  
+    }};
     }).addTo(map);
 	
    var layer_casi = L.choropleth(geojson, {
