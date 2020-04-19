@@ -170,7 +170,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         });
     });
 
-  layer_popolazione.on('add', function () {
+  layer_casi.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
         setTimeout(function () {
@@ -178,7 +178,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         });
     });
 
-    layer_popolazione.on('remove', function () {
+    layer_casi.on('remove', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
         setTimeout(function () {
@@ -193,6 +193,7 @@ var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
               };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
+	
 });
 
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
