@@ -215,7 +215,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
  var layer_incidenza = L.choropleth(geojson, {
         valueProperty: 'Cov19_Inc',
         scale: ['white','red'], // chroma.js scale - include as many as you like
-	steps: 8, // number of breaks or steps in range
+	steps: 5, // number of breaks or steps in range
 	mode: 'q', // q for quantile, e for equidistant, k for k-means
 	 style: {
             color: '#fff', // border color
@@ -238,7 +238,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
  var layer_delta_day = L.choropleth(geojson, {
         valueProperty: 'Delta_day',
         scale: ['white','red'], // chroma.js scale - include as many as you like
-	steps: 8, // number of breaks or steps in range
+	steps: 5, // number of breaks or steps in range
 	mode: 'q', // q for quantile, e for equidistant, k for k-means
 	 style: {
             color: '#fff', // border color
@@ -346,7 +346,7 @@ var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
               [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
               [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
 	      [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
-	      [legend_for_choropleth_layer(layer_incidenza, 'Incidenza % pop', '', 'legend_casi')]: layer_incidenza,
+	      [legend_for_choropleth_layer(layer_incidenza, 'Incidenza % pop', '', 'legend_incidenza')]: layer_incidenza,
 	      [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno % casi', '', 'legend_delta_day')]: layer_delta_day
               };
 
