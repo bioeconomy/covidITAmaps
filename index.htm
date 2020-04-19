@@ -126,8 +126,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     var layer_popolazione = L.choropleth(geojson, {
         valueProperty: 'Popolazione',
         scale: ['white', 'red'], // chroma.js scale - include as many as you like
-	steps: 5, // number of breaks or steps in range
-	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	steps: 6, // number of breaks or steps in range
+	mode: 'k', // q for quantile, e for equidistant, k for k-means
 	 style: {
             color: '#fff', // border color
             weight: 2,
@@ -155,51 +155,15 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     });
 
   
-var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
-	      "OpenTopoMap": OpenTopoMap,
+var layers = {"OpenStreetMap": OpenStreetMap_Mapnik
               "EsriWorld": Esri_WorldImagery,
-               [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
+              [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
 
               };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
 });
-/*
-$.getJSON('data/mappe_light.geojson', function (geojson) {
-  var layer_popolazione = L.choropleth (geojson, {
-    valueProperty: 'Popolazione',
-    scale: ['white', 'red'],
-    steps: 5,
-    mode: 'q',
-    style: {
-      color: '#fff',
-      weight: 2,
-      fillOpacity: 0.8
-    },
-    onEachFeature: function (feature, layer) {
-      layer.bindPopup('District ' + feature.properties.Popolazione + '<br>');
-    }
-  }).addTo(map);
-};
 
-    layer_popolazione.on('add', function () {
-        // Need setTimeout so that we don't get multiple
-        // onadd/onremove events raised
-        setTimeout(function () {
-            $('#legend_pop').show();
-        });
-    });
-
-    layer_popolazione.on('remove', function () {
-        // Need setTimeout so that we don't get multiple
-        // onadd/onremove events raised
-        setTimeout(function () {
-            $('#legend_pop').hide();
-        });
- });
-
-
-*/       
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
 
