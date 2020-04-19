@@ -141,8 +141,9 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    
+    }
     }).addTo(map);
 	
    var layer_casi = L.choropleth(geojson, {
@@ -163,8 +164,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    }
     }).addTo(map);
 	
     var nuovi_casi = L.choropleth(geojson, {
@@ -185,8 +186,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    }
     }).addTo(map);	
 
   var layer_nuovi_casi = L.choropleth(geojson, {
@@ -207,8 +208,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    }
     }).addTo(map);	
 
  var layer_incidenza = L.choropleth(geojson, {
@@ -229,8 +230,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    }
     }).addTo(map);	
 	
 
@@ -252,8 +253,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Totale casi<strong> : ' + feature.properties.casi     +     '<br>' +
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
-          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day );
-    }};
+          '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
+    }
     }).addTo(map);	
 	
 	
