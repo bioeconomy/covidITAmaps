@@ -151,8 +151,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     onEachFeature: function (feature, layer) {
       layer.bindPopup(
 	  '<strong>Provincia<strong>: '  + feature.properties.prov_name+ '<br>'+
-          '<strong>Regionestrong>: '     + feature.properties.reg_name+ '<br> +
-          '<strong>Popolazione<strong>: ' +  feature.properties.reg_name+ '<br> +
+          '<strong>Regione<strong>: '     + feature.properties.reg_name+ '<br>' +
+          '<strong>Popolazione<strong>: ' +  feature.properties.reg_name+ '<br>' +
           '<strong>Totale casi<strong>: ' + feature.properties.casi + '<br>' +
           '<strong>Nuovi casi<strong>: ' + feature.properties.nuovi_casi  '<br>' +
           '<strong>Incidenza su popolazione % <strong>: '+ feature.properties.Cov19_Inc +'<br>' +
