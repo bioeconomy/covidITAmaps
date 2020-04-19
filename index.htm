@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet web map with Google Sheets</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="css/leaflet-sidebar.css"/>
+    <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+ 
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map, #ciao {
+            height: 100%;
+            width: 100%;
+        }
+        #sidebar-content, #sidebar-title {
+            word-break: break-word;
+            margin-right: 40px;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" ></script>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="js/L.Control.Locate.js" ></script>
+    <script src="js/choropleth.js"></script>
+    </head>
+<body>
+<div id="map"></div>
+
+<script>
+
+var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+});
+
+
+var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+
+var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'});
+
+
+var Positron= L.tileLayer(
+  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
+  {
+    attribution:
+      "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
+
+    subdomains: "abcd",
+    maxZoom: 19
+  });
+
+
+function legend_choropleth_layer(layer, name, units, id) {
+    // Generate a HTML legend for a Leaflet layer created using choropleth.js
+    //
+    // Arguments:
+    // layer: The leaflet Layer object referring to the layer - must be a layer using
+    //        choropleth.js
+    // name: The name to display in the layer control (will be displayed above the legend, and next
+    //       to the checkbox
+    // units: A suffix to put after each numerical range in the layer - for example to specify the
+    //        units of the values - but could be used for other purposes)
+    // id: The id to give the <ul> element that is used to create the legend. Useful to allow the legend
+    //     to be shown/hidden programmatically
+    //
+    // Returns:
+    // The HTML ready to be used in the specification of the layers control
+    var limits = layer.options.limits;
+    var colors = layer.options.colors;
+    var labels = [];
+
+    // Start with just the name that you want displayed in the layer selector
+    var HTML = name
+
+    // For each limit value, create a string of the form 'X-Y'
+    limits.forEach(function (limit, index) {
+        if (index === 0) {
+            var to = parseFloat(limits[index]).toFixed(0);
+            var range_str = "< " + to;
+        }
+        else {
+            var from = parseFloat(limits[index - 1]).toFixed(0);
+            var to = parseFloat(limits[index]).toFixed(0);
+            var range_str = from + "-" + to;
+        }
+
+        // Put together a <li> element with the relevant classes, and the right colour and text
+        labels.push('<li class="sublegend-item"><div class="sublegend-color" style="background-color: ' +
+            colors[index] + '">&nbsp;</div>&nbsp;' + range_str + units + '</li>');
+    })
+
+    // Put all the <li> elements together in a <ul> element
+    HTML += '<ul id="' + id + '" class="sublegend">' + labels.join('') + '</ul>';
+
+    return HTML;
+};
+
+
+
+var map= L.map('map', {
+		center: [41.7, 11.3],
+		zoom: 5
+	});
+
+OpenStreetMap_Mapnik.addTo(map);
+
+$.getJSON('./data/mappe_light.geojson', function (geojson) {
+    var layer_IMD = L.choropleth(geojson, {
+        valueProperty: 'IMDRank',
+        scale: ['red', 'orange', 'yellow'],
+        style: {
+            color: '#111111', // border color
+            weight: 1,
+            fillOpacity: 0.5,
+            fillColor: '#ffffff'
+        }
+    }).addTo(map);
+
+    layer_IMD.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_IMD').show();
+        });
+    });
+
+    layer_IMD.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_IMD').hide();
+        });
+    });
+
+    var layers = {
+        'OpenStreetMap': OpenStreetMap_Mapnik,
+        [legend_for_choropleth_layer(layer_IMD, 'IMD', '', 'legend_IMD')]: layer_IMD
+    };
+
+    var layersControl = L.control.layers({},
+        layers,
+        { collapsed: false }).addTo(map);
+});
+/*
+$.getJSON('data/mappe_light.geojson', function (geojson) {
+  var layer_popolazione = L.choropleth (geojson, {
+    valueProperty: 'Popolazione',
+    scale: ['white', 'red'],
+    steps: 5,
+    mode: 'q',
+    style: {
+      color: '#fff',
+      weight: 2,
+      fillOpacity: 0.8
+    },
+    onEachFeature: function (feature, layer) {
+      layer.bindPopup('District ' + feature.properties.Popolazione + '<br>');
+    }
+  }).addTo(map);
+};
+
+    layer_popolazione.on('add', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_pop').show();
+        });
+    });
+
+    layer_popolazione.on('remove', function () {
+        // Need setTimeout so that we don't get multiple
+        // onadd/onremove events raised
+        setTimeout(function () {
+            $('#legend_pop').hide();
+        });
+ });
+
+
+        
+L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
+
+var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
+	      "OpenTopoMap": OpenTopoMap,
+              "EsriWorld": Esri_WorldImagery,
+               [legend_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
+
+              };
+
+var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
+  */ 
+</script>
+</body>
+</html>
