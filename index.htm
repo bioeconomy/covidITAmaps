@@ -154,14 +154,15 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         });
     });
 
-    var layers = {
-        'OpenStreetMap': OpenStreetMap_Mapnik,
-        [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
-    };
+  
+var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
+	      "OpenTopoMap": OpenTopoMap,
+              "EsriWorld": Esri_WorldImagery,
+               [legend_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
 
-    var layersControl = L.control.layers({},
-        layers,
-        { collapsed: false }).addTo(map);
+              };
+
+var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
 });
 /*
 $.getJSON('data/mappe_light.geojson', function (geojson) {
@@ -201,14 +202,6 @@ $.getJSON('data/mappe_light.geojson', function (geojson) {
 */       
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
-var layers = {"OpenStreetMap": OpenStreetMap_Mapnik,
-	      "OpenTopoMap": OpenTopoMap,
-              "EsriWorld": Esri_WorldImagery,
-               [legend_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
-
-              };
-
-var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
 
 </script>
 </body>
