@@ -125,12 +125,13 @@ OpenStreetMap_Mapnik.addTo(map);
 $.getJSON('./data/mappe_light.geojson', function (geojson) {
     var layer_popolazione = L.choropleth(geojson, {
         valueProperty: 'Popolazione',
-        scale: ['white', 'orange', 'red'],
-        style: {
-            color: '#111111', // border color
-            weight: 1,
-            fillOpacity: 0.6,
-            fillColor: '#ffffff'
+        scale: ['white', 'red'], // chroma.js scale - include as many as you like
+	steps: 5, // number of breaks or steps in range
+	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	 style: {
+            color: '#fff', // border color
+            weight: 2,
+            fillOpacity: 0.6
         },
     onEachFeature: function (feature, layer) {
       layer.bindPopup('Abitanti:' + feature.properties.Popolazione + '<br>');
@@ -141,7 +142,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
         setTimeout(function () {
-            $('#legend_IMD').show();
+            $('#legend_pop').show();
         });
     });
 
@@ -149,7 +150,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
         setTimeout(function () {
-            $('#legend_IMD').hide();
+            $('#legend_pop').hide();
         });
     });
 
