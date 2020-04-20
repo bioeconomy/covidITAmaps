@@ -195,7 +195,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         valueProperty: 'Cov19_Inc',
         scale: ['white','blue'], // chroma.js scale - include as many as you like
 	steps: 5, // number of breaks or steps in range
-	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	mode: 'e', // q for quantile, e for equidistant, k for k-means
 	 style: {
             color: '#fff', // border color
             weight: 2,
@@ -308,7 +308,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         // onadd/onremove events raised
         setTimeout(function () {
             $('#legend_casi').show();
-	    $('#legend_pop').hide();	
+
         });
     });
     layer_casi.on('remove', function () {
