@@ -321,15 +321,11 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 var layers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
-	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza % pop', '', 'legend_incidenza')]: layer_incidenza,
-	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno % casi', '', 'legend_delta_day')]: layer_delta_day,
+	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza (% della popolzione)', '', 'legend_incidenza')]: layer_incidenza,
+	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno (% tot casi)', '', 'legend_delta_day')]: layer_delta_day,
 	       [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
 	       [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
-	       "OpenStreetMap": OpenStreetMap_Mapnik,
-               "Satellite EsriWorld": Esri_WorldImagery     
-             
-             
-	     };
+               "Satellite EsriWorld": Esri_WorldImagery     };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
 	
