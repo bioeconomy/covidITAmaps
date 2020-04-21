@@ -347,6 +347,15 @@ var layers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 
 
 var layersControl = L.control.layers(baselayers, layers,{ collapsed: true }).addTo(map);
 map.removeLayer('layer_popolazione');
+$('#legend_pop').hide();
+map.removeLayer('layer_incidenza');
+$('#legend_incidenza').hide();
+map.removeLayer('layer_casi');
+$('#legend_casi').hide();
+map.removeLayer('layer_delta_day');
+$('legend_delta_day').hide();
+
+
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
 });
