@@ -1,9 +1,9 @@
 L.Control.InfoButton = L.Control.extend({
     options: {
         position: 'topleft',
-        title: titlecustom,
-        linkTitle: linkTitle,
-        html: htmlcustom,
+        title: "",
+        linkTitle: "",
+        html: "prova",
         show: false
     },
 
