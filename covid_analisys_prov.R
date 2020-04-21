@@ -56,7 +56,7 @@ merge_B=province_IT_data[ids,c("SIGLA","regioni","Popolazione","sup","dens")]
 
 prov_IT@data=cbind(prov_IT@data,merge_B[,1:5],merge_A[,1:5])
 prov_IT@data[,grep("SIGLA",names(prov_IT@data))[2:3]]=NULL
-writeOGR(prov_IT, "mappe_light.geojson", layer=".", driver="GeoJSON")
+writeOGR(prov_IT, "mappe_light.geojson", layer=".", driver="GeoJSON",overwrite_layer = T)
 writeOGR(prov_IT, ".", "mappe_light", driver="ESRI Shapefile",overwrite_layer = T)
 mappe_light=readOGR(".", "mappe_light")
 names(mappe_light@data)=c("prov_name", "prv_stt", "SIGLA", "reg_name", "prv_s_1", "regioni", "Popolazione", "sup", "dens", "casi", "nuovi_casi", "Cov19_Inc", "Delta_day")
@@ -88,7 +88,6 @@ add(repo, "logfile.md") # adding all new or changed files
 msg <- paste("update logfile",Sys.time())
 commit(repo, msg, session = TRUE)
 push(repo, credentials =map_cred)
-  
 pull(repo)
 #################################################################################################################################à
 # commits(repo)
