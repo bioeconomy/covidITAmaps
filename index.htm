@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
     <link rel="stylesheet" href="css/leaflet-panel-layers.min.css" />
 
- 
+
     <style>
         body {
             padding: 0;
@@ -22,8 +22,8 @@
             height: 100%;
             width: 100vw;
         }
-	    
-        
+
+
 
 sublegend-color {
     width: 20px;
@@ -158,10 +158,10 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Nuovi casi<strong> : ' + feature.properties.nuovi_casi + '<br>' +
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
-    
+
     }
     }).addTo(map);
-	
+
    var layer_casi = L.choropleth(geojson, {
         valueProperty: 'casi',
         scale: ['blue','white','red'], // chroma.js scale - include as many as you like
@@ -183,8 +183,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
     }).addTo(map);
-	
-  
+
+
   var layer_nuovi_casi = L.choropleth(geojson, {
         valueProperty: 'nuovi_casi',
         scale: ['blue','yellow','red'], // chroma.js scale - include as many as you like
@@ -205,7 +205,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);	
+    }).addTo(map);
 
  var layer_incidenza = L.choropleth(geojson, {
         valueProperty: 'Cov19_Inc',
@@ -227,8 +227,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);	
-	
+    }).addTo(map);
+
 
  var layer_delta_day = L.choropleth(geojson, {
         valueProperty: 'Delta_day',
@@ -250,11 +250,11 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);	
-	
-	
+    }).addTo(map);
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
   layer_nuovi_casi.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -269,8 +269,8 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         setTimeout(function () {
             $('#legend_nuovi_casi').hide();
         });
-    });	
-	
+    });
+
   layer_incidenza.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -286,7 +286,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             $('#legend_incidenza').hide();
         });
     });
-	
+
   layer_delta_day.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -302,7 +302,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
             $('#legend_delta_day').hide();
         });
     });
-	
+
     layer_popolazione.on('add', function () {
         // Need setTimeout so that we don't get multiple
         // onadd/onremove events raised
@@ -337,7 +337,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var baseLayers = {  "Satellite EsriWorld": Esri_WorldImagery  };
-	
+
 var overLayers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
 	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza (% della popolzione)', '', 'legend_incidenza')]: layer_incidenza,
 	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno (% tot casi)', '', 'legend_delta_day')]: layer_delta_day,
@@ -355,7 +355,7 @@ map.addControl(panelLayers);
 
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
-};
+});
 </script>
 </body>
 </html>
