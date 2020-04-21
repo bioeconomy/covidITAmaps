@@ -50,7 +50,7 @@ sublegend-color {
     <script src="js/leaflet.awesome-markers.min.js"></script>
     <script src="js/L.Control.Locate.js" ></script>
     <script src="js/choropleth.js"></script>
-    <script src="../src/leaflet-panel-layers.js"></script>
+    <script src="js/leaflet-panel-layers.js"></script>
     </head>
 <body>
 <div id="map"></div>
@@ -209,7 +209,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 
  var layer_incidenza = L.choropleth(geojson, {
         valueProperty: 'Cov19_Inc',
-        scale: ['white','blue'], // chroma.js scale - include as many as you like
+        scale: ['white','orange'], // chroma.js scale - include as many as you like
 	steps: 5, // number of breaks or steps in range
 	mode: 'e', // q for quantile, e for equidistant, k for k-means
 	 style: {
@@ -232,7 +232,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 
  var layer_delta_day = L.choropleth(geojson, {
         valueProperty: 'Delta_day',
-        scale: ['white','red'], // chroma.js scale - include as many as you like
+        scale: ['white','darkblue'], // chroma.js scale - include as many as you like
 	steps: 5, // number of breaks or steps in range
 	mode: 'q', // q for quantile, e for equidistant, k for k-means
 	 style: {
@@ -355,7 +355,7 @@ map.addControl(panelLayers);
 
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
-
+};
 </script>
 </body>
 </html>
