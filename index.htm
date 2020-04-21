@@ -279,23 +279,25 @@ var layersControl = L.control.layers(baselayers, layers,{ collapsed: true }).add
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
 var infoButton = L.control.infoButton({linkTitle: 'Informazioni mappa', 
-				       title: '<h4>Informazioni mappe</h4>',
+				       title: '<h4><strong>Informazioni mappe</strong></h4>',
 				       html:'<br/>il Dipartimento della Protezione Civile per informare \
-				             i cittadini e mettere a disposizione i dati raccolti sulla pandemia in corso in italia\
-				             ha elaborato cruscotti geografici interattivo raggiungibili agli indirizzi \
+				             i cittadini mette a disposizione le informazioni sulla pandemia in corso in italia\
+				             ed ha elaborato cruscotti geografici interattivo raggiungibili agli indirizzi web\
 				             <a href=\"http://arcg.is/C1unv\">DESKTOP</a> (versione desktop) \
 				              e <a href=\"http://arcg.is/081a51\" >MOBILE</a> (versione mobile) \
-				             e mette a disposizione, con licenza CC-BY-4.0, le seguenti informazioni aggiornate quotidianamente \
-				             successivamente la conferenza stampa del Capo Dipartimento. \
-				             Proponiamo una versione semplificata come mappa dei dati  \
-				             epidemiologici relativi ai casi di infettati messi in relazione \
+				             e mette a disposizione, con licenza CC-BY-4.0, i dati aggiornati quotidianamente \
+				             sulla <a href=\"https://github.com/pcm-dpc/COVID-19\" >repository Github</a>.\
+				             Proponiamo una versione semplificata come mappa tematiche agreggate dei dati  \
+				             epidemiologici relativi ai casi di infezione messi in relazione \
                                              al dato di popolazione a livello di provincia.</p>'
                                              }).addTo(map);
 
 L.controlCredits({
         	image: "img/logo_CNR.png",
         	link: 'https://www.ibe.cnr.it/',
-        	text: 'Esperimento pubblicazione dati COVID 19 DPC <br/>Istituto per la Bioeconomia'
+        	text: 'Esperimento pubblicazione dati COVID 19 DPC <br/>Istituto per la Bioeconomia',
+                width : 130,
+                height: 110
         }).addTo(map);
 });
 
