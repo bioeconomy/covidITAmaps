@@ -336,14 +336,14 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
     });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var baseLayers = {  "Satellite EsriWorld": Esri_WorldImagery  };
+var baseLayers = [{  "Satellite EsriWorld": Esri_WorldImagery  }];
 
-var overLayers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
+var overLayers = [{ [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
 	                 [legend_for_choropleth_layer(layer_incidenza, 'Incidenza (% della popolzione)', '', 'legend_incidenza')]: layer_incidenza,
 	                 [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno (% tot casi)', '', 'legend_delta_day')]: layer_delta_day,
 	                 [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
 	                 [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione
-                   };
+                 }];
 
 
 var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
