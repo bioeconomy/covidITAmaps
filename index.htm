@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Mappa incidenza italiana a livello di provincia COVID Dati DPC</title>
+    <title> Mappa incidenza italiana a livello provinciale  dei Dati DPC sul COVID-19 </title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
@@ -10,21 +10,20 @@
     <link rel="stylesheet" href="css/leaflet.awesome-markers.css"/>
     <link rel="stylesheet" href="css/leaflet-sidebar.css"/>
     <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+    <link rel="stylesheet" href="css/leaflet-panel-layers.css" />
+
  
     <style>
         body {
             padding: 0;
             margin: 0;
         }
-        html, body, #map, #ciao {
+        html, body, #map {
             height: 100%;
             width: 100vw;
         }
 	    
-        #sidebar-content, #sidebar-title {
-            word-break: break-word;
-            margin-right: 40px;
-        }
+        
 
 sublegend-color {
     width: 20px;
@@ -51,6 +50,7 @@ sublegend-color {
     <script src="js/leaflet.awesome-markers.min.js"></script>
     <script src="js/L.Control.Locate.js" ></script>
     <script src="js/choropleth.js"></script>
+    <script src="../src/leaflet-panel-layers.js"></script>
     </head>
 <body>
 <div id="map"></div>
@@ -335,17 +335,23 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         });
     });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var baseLayers = {  "Satellite EsriWorld": Esri_WorldImagery  };
 	
-var layers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
+var overLayers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
 	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza (% della popolzione)', '', 'legend_incidenza')]: layer_incidenza,
 	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno (% tot casi)', '', 'legend_delta_day')]: layer_delta_day,
 	       [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
 	       [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
                 "Satellite EsriWorld": Esri_WorldImagery     };
 
-var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
-	
+
+var panelLayers = new L.Control.PanelLayers(baseLayers, overLayers, {
+	collapsed: true
 });
+
+
+map.addControl(panelLayers);
 
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
