@@ -160,7 +160,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
 
     }
-    }).addTo(map);
+    });
 
    var layer_casi = L.choropleth(geojson, {
         valueProperty: 'casi',
