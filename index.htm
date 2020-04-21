@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Mappa incidenza COVID Dati DPC</title>
+    <title> Mappa incidenza italiana a livello di provincia COVID Dati DPC</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
@@ -19,13 +18,30 @@
         }
         html, body, #map, #ciao {
             height: 100%;
-            width: 100%;
+            width: 100vw;
         }
+	    
         #sidebar-content, #sidebar-title {
             word-break: break-word;
             margin-right: 40px;
         }
 
+sublegend-color {
+    width: 20px;
+    border: 1px solid #666666;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.sublegend-item {
+    padding-top: 0.2em;
+}
+
+.sublegend {
+    list-style: none;
+    padding-inline-start: 24px;
+    margin-top: 0px;
+}
 
     </style>
     <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -195,7 +211,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         valueProperty: 'Cov19_Inc',
         scale: ['white','blue'], // chroma.js scale - include as many as you like
 	steps: 5, // number of breaks or steps in range
-	mode: 'q', // q for quantile, e for equidistant, k for k-means
+	mode: 'e', // q for quantile, e for equidistant, k for k-means
 	 style: {
             color: '#fff', // border color
             weight: 2,
@@ -308,7 +324,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
         // onadd/onremove events raised
         setTimeout(function () {
             $('#legend_casi').show();
-	    $('#legend_pop').hide();	
+
         });
     });
     layer_casi.on('remove', function () {
@@ -321,15 +337,11 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 var layers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 'legend_nuovi_casi')]: layer_nuovi_casi,
-	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza % pop', '', 'legend_incidenza')]: layer_incidenza,
-	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno % casi', '', 'legend_delta_day')]: layer_delta_day,
-	       [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
+	       [legend_for_choropleth_layer(layer_incidenza, 'Incidenza (% della popolzione)', '', 'legend_incidenza')]: layer_incidenza,
+	       [legend_for_choropleth_layer(layer_delta_day, 'Variazione giorno (% tot casi)', '', 'legend_delta_day')]: layer_delta_day,
 	       [legend_for_choropleth_layer(layer_casi, 'Totale casi', '', 'legend_casi')]: layer_casi,
-	       "OpenStreetMap": OpenStreetMap_Mapnik,
-               "Satellite EsriWorld": Esri_WorldImagery     
-             
-             
-	     };
+	       [legend_for_choropleth_layer(layer_popolazione, 'Popolazione', '', 'legend_pop')]: layer_popolazione,
+                "Satellite EsriWorld": Esri_WorldImagery     };
 
 var layersControl = L.control.layers({}, layers,{ collapsed: false }).addTo(map);
 	
