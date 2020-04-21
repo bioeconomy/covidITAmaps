@@ -205,7 +205,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);
+    });
 
  var layer_incidenza = L.choropleth(geojson, {
         valueProperty: 'Cov19_Inc',
@@ -227,7 +227,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);
+    });
 
 
  var layer_delta_day = L.choropleth(geojson, {
@@ -250,7 +250,7 @@ $.getJSON('./data/mappe_light.geojson', function (geojson) {
           '<strong>Incidenza su popolazione (% pop) <strong> : ' + feature.properties.Cov19_Inc + '<br>' +
           '<strong>Tasso nuovi casi giornalieri (% casi) <strong> : '+ feature.properties.Delta_day )
     }
-    }).addTo(map);
+    });
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -346,7 +346,7 @@ var layers = { [legend_for_choropleth_layer(layer_nuovi_casi, 'Nuovi Casi', '', 
              };
 
 var layersControl = L.control.layers(baselayers, layers,{ collapsed: true }).addTo(map);
-
+map.removeLayer('layer_popolazione');
 L.control.locate({strings: { title: "Si sono qui!" }}).addTo(map);
 
 });
