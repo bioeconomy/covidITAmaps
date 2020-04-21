@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Mappa incidenza COVID Dati DPC</title>
+    <title> Mappa incidenza italiana a livello di provincia COVID Dati DPC</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
@@ -19,12 +18,14 @@
         }
         html, body, #map, #ciao {
             height: 100%;
-            width: 100%;
+            width: 100vw;
         }
+	    
         #sidebar-content, #sidebar-title {
             word-break: break-word;
             margin-right: 40px;
         }
+
 
 
     </style>
