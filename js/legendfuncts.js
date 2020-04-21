@@ -1,4 +1,17 @@
-function legend_choropleth_layer(layer, name, units, id) {
+
+var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+});
+
+
+var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: 'Mappe province ITA Simone Cortesi DOI 10.5281/zenodo.3757756 &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'});
+
+
+
+function legend_for_choropleth_layer(layer, name, units, id) {
+
     // Generate a HTML legend for a Leaflet layer created using choropleth.js
     //
     // Arguments:
@@ -34,11 +47,11 @@ function legend_choropleth_layer(layer, name, units, id) {
 
         // Put together a <li> element with the relevant classes, and the right colour and text
         labels.push('<li class="sublegend-item"><div class="sublegend-color" style="background-color: ' +
-            colors[index] + '"> </div> ' + range_str + units + '</li>');
+            colors[index] + '">&nbsp;</div>&nbsp;' + range_str + units + '</li>');
     })
 
     // Put all the <li> elements together in a <ul> element
     HTML += '<ul id="' + id + '" class="sublegend">' + labels.join('') + '</ul>';
 
     return HTML;
-}
+};
